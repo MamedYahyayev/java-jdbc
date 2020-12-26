@@ -77,15 +77,18 @@ public class FamilyMembers {
 	/**
 	 * @return the gender
 	 */
-	public Gender getGender() {
-		return gender;
+	public String getGender() {
+		return gender.getValue();
 	}
 
 	/**
 	 * @param gender the gender to set
 	 */
-	public void setGender(Gender gender) {
-		this.gender = gender;
+	public void setGender(String gender) {
+		if (gender.equals("m") || gender.equals("male"))
+			this.gender = Enum.valueOf(Gender.class, Gender.MALE.name());
+		else if (gender.equals("f") || gender.equals("female"))
+			this.gender = Enum.valueOf(Gender.class, Gender.FEMALE.name());
 	}
 
 	/**
@@ -105,15 +108,21 @@ public class FamilyMembers {
 	/**
 	 * @return the role
 	 */
-	public FamilyRole getRole() {
-		return role;
+	public String getRole() {
+		return role.name();
 	}
 
 	/**
 	 * @param role the role to set
 	 */
-	public void setRole(FamilyRole role) {
-		this.role = role;
+	public void setRole(String role) {
+		this.role = Enum.valueOf(FamilyRole.class, role);
+	}
+
+	@Override
+	public String toString() {
+		return "id=" + id + ", name=" + name + ", surname=" + surname + ", age=" + age + ", gender=" + gender
+				+ ", salary=" + salary + ", role=" + role;
 	}
 
 }
