@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Utility {
+public abstract class Utility {
 
 	public static void close(Connection c, PreparedStatement ps, ResultSet rs) {
 		try {

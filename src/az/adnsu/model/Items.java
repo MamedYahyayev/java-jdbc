@@ -1,14 +1,14 @@
 package az.adnsu.model;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Items {
 	private Long id;
 	private String itemName;
 	private String itemType;
 	private Double itemPrice;
-	private LocalDateTime boughtAt;
-	private Boolean isAvailable;
+	private Date boughtAt;
+	private Boolean isAvailable = Boolean.TRUE;
 
 	public Items() {
 
@@ -75,14 +75,14 @@ public class Items {
 	/**
 	 * @return the boughtAt
 	 */
-	public LocalDateTime getBoughtAt() {
+	public Date getBoughtAt() {
 		return boughtAt;
 	}
 
 	/**
 	 * @param boughtAt the boughtAt to set
 	 */
-	public void setBoughtAt(LocalDateTime boughtAt) {
+	public void setBoughtAt(Date boughtAt) {
 		this.boughtAt = boughtAt;
 	}
 
@@ -98,6 +98,12 @@ public class Items {
 	 */
 	public void setIsAvailable(Boolean isAvailable) {
 		this.isAvailable = isAvailable;
+	}
+
+	@Override
+	public String toString() {
+		return "id=" + id + ", itemName=" + itemName + ", itemType=" + itemType + ", itemPrice=" + itemPrice
+				+ ", boughtAt=" + boughtAt + ", isAvailable=" + isAvailable;
 	}
 
 }
