@@ -14,8 +14,7 @@ public class Tax {
 	}
 
 	// getters and setters
-	
-	
+
 	/**
 	 * @return the id
 	 */
@@ -42,6 +41,11 @@ public class Tax {
 	 */
 	public void setTaxName(String taxName) {
 		this.taxName = taxName;
+	}
+
+	@Override
+	public String toString() {
+		return "id=" + id + ", taxName=" + taxName;
 	}
 
 }
