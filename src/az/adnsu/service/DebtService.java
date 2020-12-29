@@ -84,7 +84,7 @@ public class DebtService implements DebtOperations {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql = "select taxes_debt.id, taxes_debt.month, taxes_debt.debt, taxes_debt.isPaid, taxes.id tax_id, taxes.tax_name "
-				+ "	from taxes_debt inner join taxes on taxes.id = taxes_debt.taxes_id WHERE id = ? ";
+				+ "	from taxes_debt inner join taxes on taxes.id = taxes_debt.taxes_id WHERE taxes_debt.id = ? ";
 		try {
 			c = DatabaseHelper.getConnection();
 			if (c != null) {
@@ -155,6 +155,29 @@ public class DebtService implements DebtOperations {
 		} finally {
 			Utility.close(c, ps, null);
 		}
+	}
+
+	@Override
+	public boolean paidDebt(Long id, Boolean isPaid) {
+		Connection c = null;
+		PreparedStatement ps = null;
+		String sql = "UPDATE taxes_debt SET isPaid = ? where id = ?";
+		try {
+			c = DatabaseHelper.getConnection();
+			if (c != null) {
+				ps = c.prepareStatement(sql);
+				ps.setBoolean(1, isPaid);
+				ps.setLong(2, id);
+				ps.execute();
+				return true;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			Utility.close(c, ps, null);
+		}
+		return false;
 	}
 
 }

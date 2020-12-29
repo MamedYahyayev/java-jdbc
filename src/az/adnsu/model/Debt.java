@@ -81,4 +81,9 @@ public class Debt {
 		this.tax = tax;
 	}
 
+	@Override
+	public String toString() {
+		return "id=" + id + ", month=" + month + ", debt=" + debt + ", isPaid=" + isPaid + ", tax=" + tax.getTaxName();
+	}
+
 }

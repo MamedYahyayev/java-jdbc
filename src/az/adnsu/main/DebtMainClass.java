@@ -17,7 +17,7 @@ public class DebtMainClass {
 		TaxService taxService = new TaxService();
 
 		Debt debt = new Debt();
-		Utility.getChoiceMessage();
+		Utility.getChoiceMessage(new String[] { "Paid Debt" });
 
 		int choice = sc.nextInt();
 		switch (choice) {
@@ -76,6 +76,14 @@ public class DebtMainClass {
 			debt = debtService.getById(sc.nextLong());
 			if (debt != null) {
 				debtService.deleteById(debt.getId());
+			}
+			break;
+		case 6:
+			System.out.println("Paid Debt");
+			System.out.print("Enter the id: ");
+			debt = debtService.getById(sc.nextLong());
+			if (debt != null) {
+				debtService.paidDebt(debt.getId(), true);
 			}
 			break;
 		default:
