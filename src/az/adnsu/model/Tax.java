@@ -8,8 +8,7 @@ public class Tax {
 
 	}
 
-	public Tax(Long id, String taxName) {
-		this.id = id;
+	public Tax(String taxName) {
 		this.taxName = taxName;
 	}
 
