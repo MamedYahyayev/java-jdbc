@@ -16,6 +16,12 @@ public class FamilyMembers {
 
 	}
 
+	public FamilyMembers(String name, String surname, Double salary) {
+		this.name = name;
+		this.surname = surname;
+		this.salary = salary;
+	}
+
 	// getters and setters
 
 	/**

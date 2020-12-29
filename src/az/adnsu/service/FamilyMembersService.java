@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import az.adnsu.dao.DatabaseHelper;
 import az.adnsu.dao.FamilyMembersOperations;
@@ -189,4 +190,18 @@ public class FamilyMembersService implements FamilyMembersOperations {
 		return membersList;
 	}
 
+	@Override
+	public Double findSalarySum() {
+		List<FamilyMembers> members = getAll();
+		Double sumOfSalary = members.stream()
+										.filter(Objects::nonNull)
+										.map(FamilyMembers::getSalary)
+										.filter(Objects::nonNull)
+										.reduce((double) 0,(total, number) -> total + number);
+		return sumOfSalary;
+	}
+
 }
+
+
+ 
