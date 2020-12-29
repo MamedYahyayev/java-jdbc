@@ -4,7 +4,7 @@ public class Debt {
 	private Long id;
 	private String month;
 	private Double debt;
-	private Boolean isPaid;
+	private Boolean isPaid = Boolean.FALSE;
 	private Tax tax;
 
 	public Debt() {
