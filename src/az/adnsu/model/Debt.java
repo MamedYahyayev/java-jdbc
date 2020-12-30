@@ -2,7 +2,7 @@ package az.adnsu.model;
 
 public class Debt {
 	private Long id;
-	private String month;
+	private Integer month;
 	private Double debt;
 	private Boolean isPaid = Boolean.FALSE;
 	private Tax tax;
@@ -28,14 +28,14 @@ public class Debt {
 	/**
 	 * @return the month
 	 */
-	public String getMonth() {
+	public Integer getMonth() {
 		return month;
 	}
 
 	/**
 	 * @param month the month to set
 	 */
-	public void setMonth(String month) {
+	public void setMonth(Integer month) {
 		this.month = month;
 	}
 

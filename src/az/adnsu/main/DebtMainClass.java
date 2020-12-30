@@ -25,7 +25,7 @@ public class DebtMainClass {
 			System.out.println("Save method");
 
 			System.out.print("Enter the Month: ");
-			String month = sc.next();
+			Integer month = sc.nextInt();
 
 			System.out.print("Enter the Debt: ");
 			Double monthDebt = sc.nextDouble();

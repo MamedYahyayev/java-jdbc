@@ -3,13 +3,17 @@ package az.adnsu.service;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 
 import az.adnsu.dao.DatabaseHelper;
 import az.adnsu.dao.DebtOperations;
 import az.adnsu.model.Debt;
 import az.adnsu.model.Tax;
+import az.adnsu.util.DateUtility;
 import az.adnsu.util.Utility;
 
 public class DebtService implements DebtOperations {
@@ -24,7 +28,7 @@ public class DebtService implements DebtOperations {
 			c = DatabaseHelper.getConnection();
 			if (c != null) {
 				ps = c.prepareStatement(sql);
-				ps.setString(1, debt.getMonth());
+				ps.setInt(1, debt.getMonth());
 				ps.setDouble(2, debt.getDebt());
 				ps.setBoolean(3, debt.getIsPaid());
 				ps.setLong(4, debt.getTax().getId());
@@ -59,7 +63,7 @@ public class DebtService implements DebtOperations {
 					tax.setTaxName(rs.getString("tax_name"));
 
 					debt.setId(rs.getLong("id"));
-					debt.setMonth(rs.getString("month"));
+					debt.setMonth(rs.getInt("month"));
 					debt.setDebt(rs.getDouble("debt"));
 					debt.setIsPaid(rs.getBoolean("isPaid"));
 					debt.setTax(tax);
@@ -100,7 +104,7 @@ public class DebtService implements DebtOperations {
 					tax.setTaxName(rs.getString("tax_name"));
 
 					debt.setId(rs.getLong("id"));
-					debt.setMonth(rs.getString("month"));
+					debt.setMonth(rs.getInt("month"));
 					debt.setDebt(rs.getDouble("debt"));
 					debt.setIsPaid(rs.getBoolean("isPaid"));
 					debt.setTax(tax);
@@ -180,4 +184,20 @@ public class DebtService implements DebtOperations {
 		return false;
 	}
 
+	@Override
+	public Double sumOfDebtsByCurrentMonth() {
+		List<Debt> debts = getAll();
+		
+		Double sumOfdebt = debts.stream()
+				.filter(this::filterDebt)
+				.map(Debt::getDebt)
+				.reduce((double) 0, (total,num) -> total + num);
+
+		return sumOfdebt;
+	}
+
+	boolean filterDebt(Debt debt) {
+		int currentMonth = DateUtility.getCurrentMonth();
+		return debt.getTax() != null && debt.getMonth() == currentMonth && debt.getIsPaid() == false;
+	}
 }
