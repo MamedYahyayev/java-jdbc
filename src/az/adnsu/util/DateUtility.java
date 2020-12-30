@@ -15,4 +15,10 @@ public abstract class DateUtility {
 		Calendar calendar = Calendar.getInstance();
 		return calendar.get(Calendar.MONTH) + 1;
 	}
+
+	public static int getMonthFromDate(Date date) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		return calendar.get(Calendar.MONTH) + 1;
+	}
 }

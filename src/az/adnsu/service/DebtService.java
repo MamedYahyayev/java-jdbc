@@ -3,11 +3,8 @@ package az.adnsu.service;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Objects;
 
 import az.adnsu.dao.DatabaseHelper;
 import az.adnsu.dao.DebtOperations;
@@ -196,7 +193,7 @@ public class DebtService implements DebtOperations {
 		return sumOfdebt;
 	}
 
-	boolean filterDebt(Debt debt) {
+	private boolean filterDebt(Debt debt) {
 		int currentMonth = DateUtility.getCurrentMonth();
 		return debt.getTax() != null && debt.getMonth() == currentMonth && debt.getIsPaid() == false;
 	}

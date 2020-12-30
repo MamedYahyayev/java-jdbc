@@ -9,6 +9,7 @@ import java.util.List;
 import az.adnsu.dao.DatabaseHelper;
 import az.adnsu.dao.ItemOperations;
 import az.adnsu.model.Items;
+import az.adnsu.util.DateUtility;
 import az.adnsu.util.Utility;
 
 public class ItemService implements ItemOperations {
@@ -147,6 +148,22 @@ public class ItemService implements ItemOperations {
 		} finally {
 			Utility.close(c, ps, null);
 		}
+	}
+
+	@Override
+	public Double sumOfItemsPriceByCurrentMonth() {
+		List<Items> items = getAll();
+		Double sumOfPrice  = items.stream()
+										.filter(this::filterItems)
+										.map(Items::getItemPrice)
+										.reduce((double) 0, (total, number) -> total + number);
+		return sumOfPrice;
+	}
+	
+	private boolean filterItems(Items item) {
+		int currentMonth = DateUtility.getCurrentMonth();
+		int month = DateUtility.getMonthFromDate(item.getBoughtAt());
+		return item.getItemPrice() != null && item.getIsAvailable() && month == currentMonth;
 	}
 
 }

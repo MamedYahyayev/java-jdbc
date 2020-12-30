@@ -5,8 +5,7 @@ public class IncomeExpense {
 	private Double income;
 	private Double expense;
 	private Double result;
-	private String incomeExpenseMonth;
-	private Integer resultPercentage;
+	private Integer incomeExpenseMonth;
 
 	public IncomeExpense() {
 
@@ -71,29 +70,21 @@ public class IncomeExpense {
 	/**
 	 * @return the incomeExpenseMonth
 	 */
-	public String getIncomeExpenseMonth() {
+	public Integer getIncomeExpenseMonth() {
 		return incomeExpenseMonth;
 	}
 
 	/**
 	 * @param incomeExpenseMonth the incomeExpenseMonth to set
 	 */
-	public void setIncomeExpenseMonth(String incomeExpenseMonth) {
+	public void setIncomeExpenseMonth(Integer incomeExpenseMonth) {
 		this.incomeExpenseMonth = incomeExpenseMonth;
 	}
 
-	/**
-	 * @return the resultPercentage
-	 */
-	public Integer getResultPercentage() {
-		return resultPercentage;
-	}
-
-	/**
-	 * @param resultPercentage the resultPercentage to set
-	 */
-	public void setResultPercentage(Integer resultPercentage) {
-		this.resultPercentage = resultPercentage;
+	@Override
+	public String toString() {
+		return "id=" + id + ", income=" + income + ", expense=" + expense + ", result=" + result
+				+ ", incomeExpenseMonth=" + incomeExpenseMonth;
 	}
 
 }
