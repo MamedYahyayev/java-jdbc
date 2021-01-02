@@ -22,7 +22,7 @@ public class FamilyMembersService implements FamilyMembersOperations {
 				+ " VALUES (?,?,?,?,?,?)";
 
 		try {
-			c = DatabaseHelper.getConnection();
+			c = DatabaseHelper.getHikariConnection();
 			if (c != null) {
 				ps = c.prepareStatement(sql);
 				ps.setString(1, familyMembers.getName());
@@ -32,6 +32,7 @@ public class FamilyMembersService implements FamilyMembersOperations {
 				ps.setDouble(5, familyMembers.getSalary());
 				ps.setString(6, familyMembers.getRole());
 				ps.execute();
+				c.commit();
 			}
 
 		} catch (Exception e) {
@@ -49,7 +50,7 @@ public class FamilyMembersService implements FamilyMembersOperations {
 		ResultSet rs = null;
 		String sql = "SELECT id , name , surname , age , gender , salary , family_role from family_members";
 		try {
-			c = DatabaseHelper.getConnection();
+			c = DatabaseHelper.getHikariConnection();
 			if (c != null) {
 				ps = c.prepareStatement(sql);
 				rs = ps.executeQuery();
@@ -84,7 +85,7 @@ public class FamilyMembersService implements FamilyMembersOperations {
 		ResultSet rs = null;
 		String sql = "SELECT id , name , surname , age , gender , salary , family_role from family_members where id = ?";
 		try {
-			c = DatabaseHelper.getConnection();
+			c = DatabaseHelper.getHikariConnection();
 			if (c != null) {
 				ps = c.prepareStatement(sql);
 				ps.setLong(1, id);
@@ -118,13 +119,14 @@ public class FamilyMembersService implements FamilyMembersOperations {
 		PreparedStatement ps = null;
 		String sql = "UPDATE family_members SET age = ?, salary = ? where id = ?";
 		try {
-			c = DatabaseHelper.getConnection();
+			c = DatabaseHelper.getHikariConnection();
 			if (c != null) {
 				ps = c.prepareStatement(sql);
 				ps.setInt(1, familyMembers.getAge());
 				ps.setDouble(2, familyMembers.getSalary());
 				ps.setLong(3, familyMembers.getId());
 				ps.execute();
+				c.commit();
 			}
 
 		} catch (Exception e) {
@@ -140,11 +142,12 @@ public class FamilyMembersService implements FamilyMembersOperations {
 		PreparedStatement ps = null;
 		String sql = "DELETE FROM family_members where id = ?";
 		try {
-			c = DatabaseHelper.getConnection();
+			c = DatabaseHelper.getHikariConnection();
 			if (c != null) {
 				ps = c.prepareStatement(sql);
 				ps.setLong(1, id);
 				ps.execute();
+				c.commit();
 			}
 
 		} catch (Exception e) {
