@@ -56,12 +56,14 @@ public class MainClass {
 			break;
 		case 3:
 			System.out.println("Find By Id method");
-			familyMembers = membersService.getById(5L);
+			System.out.print("Enter the id: ");
+			familyMembers = membersService.getById(sc.nextLong());
 			System.out.println(familyMembers);
 			break;
 		case 4:
 			System.out.println("Update method");
-			familyMembers = membersService.getById(5L);
+			System.out.print("Enter the id: ");
+			familyMembers = membersService.getById(sc.nextLong());
 			if (familyMembers != null) {
 				System.out.print("Enter the age: ");
 				familyMembers.setAge(sc.nextInt());
