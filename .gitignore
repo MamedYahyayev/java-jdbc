@@ -1,3 +1,5 @@
 echo "
 bin/**
 lib/**
+mockito-all-1.10.19.jar
+.classpath
