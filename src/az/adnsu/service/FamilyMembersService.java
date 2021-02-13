@@ -50,7 +50,7 @@ public class FamilyMembersService implements FamilyMembersOperations {
 		ResultSet rs = null;
 		String sql = "SELECT id , name , surname , age , gender , salary , family_role from family_members";
 		try {
-			c = DatabaseHelper.getHikariConnection();
+			c = DatabaseHelper.getMySqlConnection();
 			if (c != null) {
 				ps = c.prepareStatement(sql);
 				rs = ps.executeQuery();
