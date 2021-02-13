@@ -53,6 +53,7 @@ public class FamilyMembersService implements FamilyMembersOperations {
 			c = DatabaseHelper.getMySqlConnection();
 			if (c != null) {
 				ps = c.prepareStatement(sql);
+				ps.setMaxRows(20);
 				rs = ps.executeQuery();
 				while (rs.next()) {
 					FamilyMembers members = new FamilyMembers();

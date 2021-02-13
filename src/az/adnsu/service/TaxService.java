@@ -44,6 +44,7 @@ public class TaxService implements TaxOperations {
 			c = DatabaseHelper.getConnection();
 			if (c != null) {
 				ps = c.prepareStatement(sql);
+				ps.setMaxRows(20);
 				rs = ps.executeQuery();
 				while (rs.next()) {
 					Tax tax = new Tax();

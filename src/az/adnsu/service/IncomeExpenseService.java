@@ -48,6 +48,7 @@ public class IncomeExpenseService implements IncomeExpenseOperations {
 			c = DatabaseHelper.getConnection();
 			if (c != null) {
 				ps = c.prepareStatement(sql);
+				ps.setMaxRows(20);
 				rs = ps.executeQuery();
 				while (rs.next()) {
 					IncomeExpense incomeExpense = new IncomeExpense();
